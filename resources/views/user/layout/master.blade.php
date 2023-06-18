@@ -30,15 +30,16 @@
                     <div class="row p-2">
 
                         <div class="col-6">
-                            <img src="image/login image.png" class=" w-100 h-100 object-fit-cover" alt="...">
+                            <img src="{{ asset("user/image/login image.png") }}" class=" w-100 h-100 object-fit-cover" alt="...">
                         </div>
                         <div class="col-6 p-3">
-                            <form action="" class="me-3">
+                            <form  method="POST" action="{{ route('login') }}" class="me-3">
+                                @csrf
                                 <div class="form-group mb-3">
-                                    <input type="email" name="email" class="form-control" placeholder="Enter your email" id="email">
+                                    <input ype="email" name="email" :value="old('email')" required autofocus autocomplete="username" class="form-control" placeholder="Enter your email" id="email">
                                 </div>
                                 <div class="form-group mb-3">
-                                    <input type="password" name="password" class="form-control" placeholder="Enter your password" id="password">
+                                    <input type="password" name="password" required autocomplete="current-password" class="form-control" placeholder="Enter your password" id="password">
                                 </div>
 
                                 <div class="form-group mt-5">
@@ -63,7 +64,7 @@
                     <div class="row p-2">
 
                         <div class="col-6">
-                            <img src="image/login image.png" class=" w-100 h-100 object-fit-cover" alt="...">
+                            <img src="{{ asset("user/image/login image.png") }}" class=" w-100 h-100 object-fit-cover" alt="...">
                         </div>
                         <div class="col-6 p-3">
                             <form action="" class="me-3">
