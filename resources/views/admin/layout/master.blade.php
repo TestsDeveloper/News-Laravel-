@@ -12,3 +12,4 @@
   </aside>
 </div>
 @include("admin.body.footer")
+@yield('script')
