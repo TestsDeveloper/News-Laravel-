@@ -34,7 +34,7 @@
         </li>
 
         <li class="nav-item">
-          <a href="{{ route("post#list") }}" class="nav-link">
+          <a href="{{ route("new#postList") }}" class="nav-link">
             <i class="fa-regular fa-newspaper"></i>
             <p>
               News

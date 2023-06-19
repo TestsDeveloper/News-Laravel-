@@ -1,31 +1,68 @@
 @extends('admin.layout.master')
 @section("content")
-<section class="content">
+<section class="content row">
+    @if (session('deleteSuccess'))
+    <div class="col-5 offset-7 mt-3">
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>
+                 <i class="fa-solid fa-check"></i> {{session('deleteSuccess')}} 
+            </strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+    </div>
+    @endif
+
+    @if (session('updateSuccess'))
+    <div class="col-5 offset-7 mt-3">
+        <div class="alert alert-success  alert-dismissible fade show" role="alert">
+            <strong>
+                 <i class="fa-solid fa-check"></i> {{session('updateSuccess')}}
+            </strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+    </div>
+    @endif
+
     <div class="container-fluid">
-      <div class="row mt-4">
+    
+      <div class="row mt-3">
         <div class="col-12">
+        
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">
-                <a href="./addNews.html"><button class="btn btn-sm btn-outline-dark">Add News</button></a>
+              <h3 class="card-title d-flex align-items-center">
+                <a href="{{ route('news#createPostPage') }}"><button class="btn btn-sm btn-outline-dark">Add News</button></a>
+                <button class="btn btn-sm btn-dark ms-2" disabled>Total - {{ count($posts) }}</button>
               </h3>
 
               <div class="card-tools">
-                <div class="input-group input-group-sm" style="width: 150px;margin-top:1px;">
-                  <input type="text" name="table_search" class="form-control float-right outline-none" placeholder="Search">
-                    <button type="submit" class="btn btn-outline-dark outline-none">
-                      <i class="fas fa-search"></i>
-                    </button>
-                </div>
+
+                <form action="{{route('new#postList')}}" method ="get">
+                    @csrf
+                    <div class="d-flex input-group-sm" >
+                        <input name="key" type="text" class="form-control " name="searchData" placeholder="Search" value="{{ request('key')}} ">
+                        <button class="btn btn-dark ms-2">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </form>
+
               </div>
             </div>
             <!-- /.card-header -->
             <div class="card-body table-responsive p-0">
+                
+              @if (count($posts) == 0)
+              <h2 class="text-center text-danger mt-5">
+                There is no news yet!
+              </h2>
+              @else
               <table class="table table-hover text-nowrap text-center">
                 <thead>
                   <tr>
                     <th>ID</th>
                     <th>Title</th>
+                    <th>Category</th>
                     <th>Image</th>
                     <th>Viewer</th>
                     <th>React</th>
@@ -34,50 +71,31 @@
                   </tr>
                 </thead>
                 <tbody>
+                  @foreach ($posts as $post)
                   <tr>
-                    <td>1</td>
-                    <td>The Singer</td>
+                    <td>{{ $post->id }}</td>
+                    <td>{{ $post->title }}</td>
+                    <td>{{ $post->category_name }}</td>
                     <td>
-                      <img src="https://www.pinkvilla.com/pics/480x480/167366856_ariana-grande-1_1280*720_202301.jpg" class="img-thumbnail" width="100px">
+                      <img src="{{ asset('storage/'.$post->image) }}" class="img-thumbnail" width="100px">
                     </td>
-                    <td>1.1k</td>
-                    <td>1k</td>
-                    <td>17/6/2023</td>
+                    <td>{{ $post->view_count }}</td>
+                    <td>{{ $post->reaction_count }}</td>
+                    <td>{{ $post->created_at->format('D/F/Y') }}</td>
                     <td>
-                      <a href="./newsEdit.html"><button class="btn btn-sm bg-dark text-white" ><i class="fas fa-edit"></i></button></a>
-                      <button class="btn btn-sm bg-danger text-white"><i class="fas fa-trash-alt"></i></button>
+                      <a title="Edit" href="{{ route('news#detailPostPage',$post->id) }}"><button class="btn btn-sm bg-dark text-white" ><i class="fas fa-edit"></i></button></a>
+                      <a title="Delete" href="{{ route('news#deletePost',$post->id) }}" class="btn btn-sm bg-danger text-white"><i class="fas fa-trash-alt"></i></a>
                     </td>
                   </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>The Rumbling</td>
-                    <td>
-                       <img src="https://www.billboard.com/wp-content/uploads/2022/01/02-Attack-on-Titan-The-Final-Season-Part-2-Opening%EF%BD%9CThe-Rumbling-SiM-screenshot-2022-billbooard-1548.jpg" class="img-thumbnail" width="100px">
-                    </td>
-                    <td>50k</td>
-                    <td>2.5k</td>
-                    <td>17/6/2023</td>
-                    <td>
-                      <a href="./newsEdit.html"><button class="btn btn-sm bg-dark text-white" ><i class="fas fa-edit"></i></button></a>
-                      <button class="btn btn-sm bg-danger text-white"><i class="fas fa-trash-alt"></i></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td>Weather</td>
-                    <td>
-                       <img src="https://t4.ftcdn.net/jpg/02/66/38/15/360_F_266381525_alVrbw15u5EjhIpoqqa1eI5ghSf7hpz7.jpg" class="img-thumbnail" width="100px">
-                    </td>
-                    <td>600k</td>
-                    <td>69.4k</td>
-                    <td>17/6/2023</td>
-                    <td>
-                      <a href="./newsEdit.html"><button class="btn btn-sm bg-dark text-white" ><i class="fas fa-edit"></i></button></a>
-                      <button class="btn btn-sm bg-danger text-white"><i class="fas fa-trash-alt"></i></button>
-                    </td>
-                  </tr>
+                  @endforeach
+
                 </tbody>
               </table>
+              <div class="px-2">
+                {{ $posts->links("pagination::bootstrap-5") }}
+            </div>
+              @endif
+
             </div>
             <!-- /.card-body -->
           </div>
