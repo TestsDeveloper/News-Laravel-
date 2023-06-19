@@ -3,7 +3,7 @@
 <section class="content">
     <div class="container-fluid">
       <div class="row mt-4">
-        <div class="col-8 offset-3 mt-5">
+        <div class="col-12 col-md-9 offset-3 mt-5">
           <div class="col-md-9">
             <div class="card">
               <div class="card-header p-2">
@@ -42,7 +42,7 @@
 
                       <div class="form-group row">
                         <div class="offset-sm-2 col-sm-10">
-                          <a href="./password.html">Change Password</a>
+                          <a href="#" class="text-decoration-none text-muted">Change Password</a>
                         </div>
                       </div>
                       <div class="form-group row">

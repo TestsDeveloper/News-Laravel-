@@ -7,18 +7,15 @@
           <div class="card">
             <div class="card-header">
               <h3 class="card-title">
-                <a href="./addCategory.html"><button class="btn btn-sm btn-outline-dark">Add Category</button></a>
+                <a href="{{ route("create#category") }}"><button class="btn btn-sm btn-outline-dark">Add Category</button></a>
               </h3>
 
               <div class="card-tools">
-                <div class="input-group input-group-sm" style="width: 150px;">
-                  <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-
-                  <div class="input-group-append">
-                    <button type="submit" class="btn btn-default">
+                <div class="input-group input-group-sm" style="width: 150px;margin-top:1px;">
+                  <input type="text" name="table_search" class="form-control float-right outline-none" placeholder="Search">
+                    <button type="submit" class="btn btn-outline-dark outline-none">
                       <i class="fas fa-search"></i>
                     </button>
-                  </div>
                 </div>
               </div>
             </div>

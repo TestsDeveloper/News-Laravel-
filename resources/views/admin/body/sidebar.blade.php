@@ -1,7 +1,6 @@
 
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <a href="#" class="brand-link">
-
+    <a href="#" class="brand-link text-decoration-none">
       <span class="brand-text font-weight-light p-3" >Bultin News <i class="fa-regular px-1 fa-newspaper"></i></span>
     </a>
     <div class="sidebar">
@@ -52,8 +51,6 @@
           </a>
         </li>
 
-
-
         <li class="nav-item">
           <a href="{{ route("contact#list") }}" class="nav-link">
             <i class="fa-regular fa-paper-plane"></i>
@@ -67,7 +64,7 @@
           <form action="{{ route("logout") }}" method="POST" class="nav-link">
             @csrf
             <i class="fas fa-sign-out-alt"></i>
-            <input type="submit" value="Logout" class="btn btn-sm btn-outline text-white">
+            <p><input type="submit" value="Logout" class="btn btn-sm btn-outline text-white"></p>
         </form>
         </li>
       </ul>

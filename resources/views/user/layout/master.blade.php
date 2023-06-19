@@ -43,7 +43,7 @@
                                 </div>
 
                                 <div class="form-group mt-5">
-                                    <button class="btn btn-outline-danger me-3">Login</button>
+                                    <button type="submit" class="btn btn-outline-danger me-3">Login</button>
                                 </div>
                             </form>
                         </div>

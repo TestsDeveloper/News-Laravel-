@@ -27,6 +27,8 @@ Route::get('/contactList', [UserController::class, 'contactList'])->name('contac
 
 // category
 Route::get('/categoryList', [CategoryController::class, 'categoryList'])->name('category#list');
+Route::get('create/category', [CategoryController::class, 'createCategory'])->name('create#category');
+Route::post('create', [CategoryController::class, 'create'])->name('create');
 
 
 //news post
