@@ -12,7 +12,7 @@ class PostController extends Controller
 
     //direct post list page
     public function postList() {
-        $posts = Post::select('posts.*','categories.name as category_name')
+        $posts = Post::select('posts.*','categories.category_name as category_name')
         ->when(request('key'), function ($query) {
             $query->where('posts.title', 'like', '%' . request('key') . '%');
         })
