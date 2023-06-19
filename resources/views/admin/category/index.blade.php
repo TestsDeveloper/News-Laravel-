@@ -3,6 +3,26 @@
 <section class="content">
     <div class="container-fluid">
       <div class="row mt-4">
+        @if (session("insertSuccess"))
+
+            <div class="alert alert-success alert-dismissible fade show">
+            <strong> {{session("insertSuccess")}} </strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert">
+                <span>&times;</span>
+            </button>
+            </div>
+        @endif
+
+        @if (session("deleteSuccess"))
+
+            <div class="alert alert-danger alert-dismissible fade show">
+            <strong> {{session("deleteSuccess")}} </strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert">
+                <span>&times;</span>
+            </button>
+            </div>
+        @endif
+
         <div class="col-12">
           <div class="card">
             <div class="card-header">
@@ -12,10 +32,12 @@
 
               <div class="card-tools">
                 <div class="input-group input-group-sm" style="width: 150px;margin-top:1px;">
-                  <input type="text" name="table_search" class="form-control float-right outline-none" placeholder="Search">
-                    <button type="submit" class="btn btn-outline-dark outline-none">
-                      <i class="fas fa-search"></i>
-                    </button>
+                    <form action="{{route('category#list')}}" method="get" class="input-group input-group-sm">
+                        @csrf
+                        <input type="text" name="key" class="form-control float-right outline-none" placeholder="search" value="{{ request('key')}}">
+                        <button class="btn btn-outline-dark outline-none" type="submit">
+                        <i class="fas fa-search"></i>
+                    </form>
                 </div>
               </div>
             </div>
@@ -31,42 +53,17 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>Gaming</td>
-                    <td>11-7-2023</td>
-                    <td>
-                      <a href="./categoryUpdate.html"><button class="btn btn-sm bg-dark text-white"><i class="fas fa-edit"></i></button></a>
-                      <button class="btn btn-sm bg-danger text-white"><i class="fas fa-trash-alt"></i></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>Health</td>
-                    <td>11-7-2014</td>
-                    <td>
-                      <a href="./categoryUpdate.html"><button class="btn btn-sm bg-dark text-white"><i class="fas fa-edit"></i></button></a>
-                      <button class="btn btn-sm bg-danger text-white"><i class="fas fa-trash-alt"></i></button>
-                    </td>
-                  </tr>
-                   <tr>
-                    <td>3</td>
-                    <td>Business</td>
-                    <td>11-7-2014</td>
-                    <td>
-                      <a href="./categoryUpdate.html"><button class="btn btn-sm bg-dark text-white"><i class="fas fa-edit"></i></button></a>
-                      <button class="btn btn-sm bg-danger text-white"><i class="fas fa-trash-alt"></i></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>4</td>
-                    <td>Sing</td>
-                    <td>11-7-2014</td>
-                    <td>
-                      <button class="btn btn-sm bg-dark text-white"><i class="fas fa-edit"></i></button>
-                      <button class="btn btn-sm bg-danger text-white"><i class="fas fa-trash-alt"></i></button>
-                    </td>
-                  </tr>
+                  @foreach ( $categories as $item )
+                    <tr>
+                        <td>4</td>
+                        <td>{{ $item->category_name }}</td>
+                        <td>{{ $item->created_at->diffForHumans() }}</td>
+                        <td>
+                        <a href="{{ route('updatePage#category', $item['id']) }}" class="btn btn-sm bg-dark text-white"><i class="fas fa-edit"></i></a>
+                        <a href="{{ route('delete#category', $item['id']) }}" class="btn btn-sm bg-danger text-white"><i class="fas fa-trash-alt"></i></a>
+                        </td>
+                    </tr>
+                  @endforeach
                 </tbody>
               </table>
             </div>

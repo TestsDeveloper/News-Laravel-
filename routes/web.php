@@ -29,6 +29,9 @@ Route::get('/contactList', [UserController::class, 'contactList'])->name('contac
 Route::get('/categoryList', [CategoryController::class, 'categoryList'])->name('category#list');
 Route::get('create/category', [CategoryController::class, 'createCategory'])->name('create#category');
 Route::post('create', [CategoryController::class, 'create'])->name('create');
+Route::get('updatePage/category/{id}', [CategoryController::class, 'updatePage'])->name('updatePage#category');
+Route::post('update/category/{id}', [CategoryController::class, 'update'])->name('update#category');
+Route::get('delete/category/{id}', [CategoryController::class, 'delete'])->name('delete#category');
 
 
 //news post
