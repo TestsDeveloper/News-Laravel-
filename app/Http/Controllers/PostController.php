@@ -115,7 +115,7 @@ class PostController extends Controller
             'category_id' => $request->categoryId,
             'title'       => $request->title,
             'description' => $request->description,
-        
+
         ];
     }
 
@@ -126,7 +126,7 @@ class PostController extends Controller
             'title'        => 'required|min:3',
             'description'  => 'required|min:10',
             'categoryId'  => 'required',
-            
+
         ];
 
         $validationRule['image'] = $action == 'create' ? 'required|mimes:jpg,jpeg,png,webp|file' : 'mimes:jpg,jpeg,png,webp|file';
