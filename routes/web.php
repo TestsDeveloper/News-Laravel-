@@ -1,28 +1,35 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostController;
 
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified'
-])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('admin.myprofile.index');
-    })->name('dashboard');
+Route::middleware('auth')->group(function () {
+    Route::redirect('/','login');
+
+});
+
+//admin check and user
+Route::get('/condition',[AuthController::class,'authCondition']);
+
+//admin profile page
+Route::prefix('admin')->group(function(){
+    //Admin profile
+    Route::get('/adminProfile/{id}', [UserController::class, 'adminProfile'])->name('admin#profile');
+    Route::post('/update/{id}',[UserController::class,'profileUpdate'])->name('profile#update');
+
+
+
+    Route::get('/adminList', [UserController::class, 'adminList'])->name('admin#list');
+    Route::get('/userList', [UserController::class, 'userList'])->name('user#list');
+    Route::get('/contactList', [UserController::class, 'contactList'])->name('contact#list');
 });
 
 // home page
-Route::get('/', [UserController::class, 'homePage'])->name("home#page");
+Route::get('/home', [UserController::class, 'homePage'])->name("home#page");
 
-// user
-Route::get('/adminProfile', [UserController::class, 'adminProfile'])->name('admin#profile');
-Route::get('/adminList', [UserController::class, 'adminList'])->name('admin#list');
-Route::get('/userList', [UserController::class, 'userList'])->name('user#list');
-Route::get('/contactList', [UserController::class, 'contactList'])->name('contact#list');
 
 
 // category
