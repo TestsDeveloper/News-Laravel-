@@ -7,7 +7,7 @@
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
         <li class="nav-item">
-          <a href="{{ route("admin#profile",auth()->user()->id) }}" class="nav-link">
+          <a href="{{ route("admin#profile") }}" class="nav-link">
             <i class="fas fa-user-circle"></i>
             <p>
               My Profile

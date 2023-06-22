@@ -15,7 +15,6 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
             $table->string('title');
             $table->string('description');
             $table->integer('category_id');
@@ -23,7 +22,7 @@ return new class extends Migration
             $table->integer('reaction_count')->default(0);
             $table->integer('comment_count')->default(0);
             $table->integer('view_count')->default(0);
-
+            $table->timestamps();
 
         });
     }
