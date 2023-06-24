@@ -59,7 +59,7 @@
                       <div class="form-group row">
                         <label for="inputName" class="col-sm-2 col-form-label">Address</label>
                         <div class="col-sm-10">
-                          <textarea name="address" class="form-control" id="" cols="30" rows="5" placeholder="Address">{{ old('address',Auth::user()->address) }}</textarea>
+                          <textarea name="address" class="form-control" id="" cols="30" rows="3" placeholder="Address">{{ old('address',Auth::user()->address) }}</textarea>
                             @error('address')
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
@@ -68,7 +68,7 @@
 
                       <div class="form-group row">
                         <div class="offset-sm-2 col-sm-10">
-                          <a href="#" class="text-decoration-none text-muted">Change Password</a>
+                          <a href="{{ route('password#page',Auth::user()->id) }}" class="text-decoration-none text-muted">Change Password</a>
                         </div>
                       </div>
                       <div class="form-group row">

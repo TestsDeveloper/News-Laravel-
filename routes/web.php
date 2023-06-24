@@ -15,11 +15,10 @@ Route::middleware('auth')->group(function () {
     //admin profile page
 Route::prefix('admin')->group(function(){
 
-
     //Admin profile
     Route::get('/adminProfile', [UserController::class, 'adminProfile'])->name('admin#profile');
     Route::post('/update/{id}',[UserController::class,'profileUpdate'])->name('profile#update');
-
+    Route::get('/passwordPage/{id}',[UserController::class,'passwordPage'])->name('password#page');
 
 
     Route::get('/adminList', [UserController::class, 'adminList'])->name('admin#list');

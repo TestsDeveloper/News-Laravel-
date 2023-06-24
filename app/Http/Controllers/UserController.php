@@ -41,6 +41,22 @@ class UserController extends Controller
 
     }
 
+
+    private function oldDeleteImage($user,$id){
+        $oldImage = $user->select('profile_photo_path')
+                         ->where('id',$id)
+                         ->first();
+
+
+        if($oldImage['profile_photo_path'] != null){
+            Storage::delete('public/profileImage/'. $oldImage['profile_photo_path']);
+        }
+    }
+
+    public function passwordPage(){
+        return view('admin.myprofile.password');
+    }
+
     public function adminList() {
         return view("admin.adminList.index");
     }
@@ -53,16 +69,9 @@ class UserController extends Controller
         return view("admin.content.index");
     }
 
-    private function oldDeleteImage($user,$id){
-        $oldImage = $user->select('profile_photo_path')
-                         ->where('id',$id)
-                         ->first();
 
 
-        if($oldImage['profile_photo_path'] != null){
-            Storage::delete('public/profileImage/'. $oldImage['profile_photo_path']);
-        }
-    }
+
 
     private function profileData($request){
         return [
