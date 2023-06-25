@@ -9,7 +9,20 @@
               <div class="card-header p-2">
                 <legend class="text-center">User Profile</legend>
               </div>
+
               <div class="card-body">
+                @if (session('updateSuccess'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{ session('updateSuccess') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                @endif
+                @if (session('passwordSuccess'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{ session('passwordSuccess') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                @endif
                 @if (Auth::user()->profile_photo_path != null)
                 <img width="100px" height="100px" class=" rounded-circle" src="{{ asset('storage/profileImage/' . Auth::user()->profile_photo_path) }}" alt="">
                 @else
@@ -23,7 +36,7 @@
 
                         <label for="inputName" class="col-sm-2 col-form-label">Name</label>
                         <div class="col-sm-10">
-                          <input type="text" class="form-control" name="name" id="inputName" placeholder="Name" value="{{ old('name',Auth::user()->name) }}">
+                          <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="inputName" placeholder="Name" value="{{ old('name',Auth::user()->name) }}">
                             @error('name')
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
@@ -32,7 +45,7 @@
                       <div class="form-group row">
                         <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
                         <div class="col-sm-10">
-                          <input type="email" class="form-control" name="email" id="inputEmail" placeholder="Email" value="{{ old('email',Auth::user()->email) }}">
+                          <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" id="inputEmail" placeholder="Email" value="{{ old('email',Auth::user()->email) }}">
                           @error('email')
                             <small class="text-danger">{{ $message }}</small>
                           @enderror
@@ -42,14 +55,14 @@
                       <div class="form-group row">
                         <label for="inputEmail" class="col-sm-2 col-form-label">Image</label>
                         <div class="col-sm-10">
-                          <input type="file" class="form-control" name="profile_photo_path" id="inputImage" placeholder="Image" value="{{ old('image',Auth::user()->profile_photo_path) }}">
+                          <input type="file" class="form-control @error('profile_photo_path') is-invalid @enderror" name="profile_photo_path" id="inputImage" placeholder="Image" value="{{ old('image',Auth::user()->profile_photo_path) }}">
                         </div>
                       </div>
 
                       <div class="form-group row">
                         <label for="inputName" class="col-sm-2 col-form-label">Phone</label>
                         <div class="col-sm-10">
-                          <input type="number" class="form-control" id="inputPhone" name="phone" placeholder="Phone" value="{{ old('phone',Auth::user()->phone) }}">
+                          <input type="number" class="form-control @error('phone') is-invalid @enderror" id="inputPhone" name="phone" placeholder="Phone" value="{{ old('phone',Auth::user()->phone) }}">
                           @error('phone')
                             <small class="text-danger">{{ $message }}</small>
                           @enderror
@@ -59,7 +72,7 @@
                       <div class="form-group row">
                         <label for="inputName" class="col-sm-2 col-form-label">Address</label>
                         <div class="col-sm-10">
-                          <textarea name="address" class="form-control" id="" cols="30" rows="3" placeholder="Address">{{ old('address',Auth::user()->address) }}</textarea>
+                          <textarea name="address" class="form-control @error('address') is-invalid @enderror" id="" cols="30" rows="3" placeholder="Address">{{ old('address',Auth::user()->address) }}</textarea>
                             @error('address')
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
@@ -68,7 +81,7 @@
 
                       <div class="form-group row">
                         <div class="offset-sm-2 col-sm-10">
-                          <a href="{{ route('password#page',Auth::user()->id) }}" class="text-decoration-none text-muted">Change Password</a>
+                          <a href="{{ route('password#page') }}" class="text-decoration-none text-muted">Change Password</a>
                         </div>
                       </div>
                       <div class="form-group row">

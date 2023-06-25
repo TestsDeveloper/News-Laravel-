@@ -13,24 +13,37 @@
                 <div class="card-body">
                   <div class="tab-content">
                     <div class="active tab-pane" id="activity">
-                      <form class="form-horizontal">
+                      <form action="{{ route('password#change',Auth::user()->id) }}" method="POST" class="form-horizontal">
+                        @csrf
                         <div class="form-group row">
                           <label for="inputName" class="col-sm-4 col-form-label">Old Password</label>
                           <div class="col-sm-8">
-                            <input type="password" class="form-control" id="inputOld" placeholder="Old Password">
+                            <input type="password" class="form-control @error('oldPassword') is-invalid @enderror @if(session('wrong')) is-invalid @endif "  name="oldPassword" id="inputOld" placeholder="Old Password">
+                            @error('oldPassword')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                            @if(session('wrong'))
+                            <small class="text-danger">{{ session('wrong') }}</small>
+                            @endif
                           </div>
                         </div>
                         <div class="form-group row">
                             <label for="inputName" class="col-sm-4 col-form-label">New Password</label>
                             <div class="col-sm-8">
-                              <input type="password" class="form-control" id="inputNew" placeholder="New Password">
+                              <input type="password" class="form-control  @error('newPassword') is-invalid @enderror" id="inputNew" name="newPassword" placeholder="New Password">
+                                @error('newPassword')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
                             </div>
                           </div>
 
                           <div class="form-group row">
                             <label for="inputName" class="col-sm-4 col-form-label">Confirm Password</label>
                             <div class="col-sm-8">
-                              <input type="password" class="form-control" id="inputConfirm" placeholder="Confirm Password">
+                              <input type="password" class="form-control  @error('confirmPassword') is-invalid @enderror" name="confirmPassword" id="inputConfirm" placeholder="Confirm Password">
+                                @error('confirmPassword')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
                             </div>
                           </div>
 

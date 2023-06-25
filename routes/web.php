@@ -12,13 +12,17 @@ Route::middleware('auth')->group(function () {
     Route::redirect('/','login');
 
 
+
+
+
     //admin profile page
-Route::prefix('admin')->group(function(){
+Route::middleware(['admin_auth'])->prefix('admin')->group(function(){
 
     //Admin profile
     Route::get('/adminProfile', [UserController::class, 'adminProfile'])->name('admin#profile');
     Route::post('/update/{id}',[UserController::class,'profileUpdate'])->name('profile#update');
-    Route::get('/passwordPage/{id}',[UserController::class,'passwordPage'])->name('password#page');
+    Route::get('/passwordPage',[UserController::class,'passwordPage'])->name('password#page');
+    Route::post('/password/change/{id}',[UserController::class,'passwordChange'])->name('password#change');
 
 
     Route::get('/adminList', [UserController::class, 'adminList'])->name('admin#list');
@@ -28,16 +32,8 @@ Route::prefix('admin')->group(function(){
 
 });
 
-
-
-
-
-// home page
-Route::get('/home', [UserController::class, 'homePage'])->name("home#page");
-
-
-
-// category
+Route::middleware(['admin_auth'])->group(function(){
+    // category
 Route::get('/categoryList', [CategoryController::class, 'categoryList'])->name('category#list');
 Route::get('create/category', [CategoryController::class, 'createCategory'])->name('create#category');
 Route::post('create', [CategoryController::class, 'create'])->name('create');
@@ -65,6 +61,14 @@ Route::prefix('news')->group(function(){
 
     //edit post
     Route::post('edit/post/{id}' ,[PostController::class,'editPost'])->name('news#editPost');
+});
+});
+
+
+
+// home page
+Route::middleware('user_auth')->group(function(){
+    Route::get('/home', [UserController::class, 'homePage'])->name("home#page");
 });
 
 

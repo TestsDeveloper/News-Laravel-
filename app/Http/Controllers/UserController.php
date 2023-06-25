@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PasswordValidation;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Contracts\Cache\Store;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\ProfileStoreRequest;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -55,6 +58,25 @@ class UserController extends Controller
 
     public function passwordPage(){
         return view('admin.myprofile.password');
+    }
+
+    public function passwordChange(PasswordValidation $request,$id){
+       $currentUser =User::where('id',$id)->first();
+
+       $oldValuePassword = $currentUser->password;
+
+       $hasPassword =Hash::make($request->newPassword);
+
+
+       if(Hash::check($request->oldPassword,$oldValuePassword)){
+            User::where('id',$id)->update([
+                'password' => $hasPassword
+            ]);
+
+             return redirect()->route('admin#profile')->with('passwordSuccess','Your password changed successfully!');
+       }else{
+        return back()->with("wrong","Your old password is do not match our recorded***");
+       }
     }
 
     public function adminList() {
