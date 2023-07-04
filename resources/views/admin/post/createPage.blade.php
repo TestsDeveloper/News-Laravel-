@@ -79,6 +79,31 @@
                                     @enderror
                                 </div>
 
+                                <div class="form-group mt-3">
+                                    <label for="" class="control-label mb-1">News Type</label> <br>
+
+                                    <div class="d-flex gap-3">
+                                        <div class="d-flex align-items-center gap-2
+                                        ">
+                                            <input type="checkbox" id="popularNew" name="popularNew" value="true">
+                                            <label class="text-muted mt-2
+                                            " for="popular">Popular New</label>
+                                        </div>
+                                        <div class="d-flex align-items-center gap-2">
+                                            <input type="checkbox" id="trendNew" name="trendNew" value="true">
+                                            <label class="text-muted mt-2
+                                            " for="trendNew">Trend New</label>
+                                        </div>
+                                        <div class="d-flex align-items-center gap-2">
+                                            <input type="checkbox" id="titleNew" name="titleNew" value=""Boat"">
+                                            <label class="text-muted mt-2
+                                            " for="titleNew">Title New</label>
+                                        </div>
+                                       
+                                        
+                                    </div>
+                                </div>
+
                                 <div class=" mt-4">
                                     <button type="submit" class="btn btn-dark w-100 p-2 fs-5">
                                         <i class="fas fa-arrow-up"></i>

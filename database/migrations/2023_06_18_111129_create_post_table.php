@@ -22,6 +22,9 @@ return new class extends Migration
             $table->integer('reaction_count')->default(0);
             $table->integer('comment_count')->default(0);
             $table->integer('view_count')->default(0);
+            $table->string('trend_new')->default(false);
+            $table->string('popular_new')->default(false);
+            $table->string('title_new')->default(false);
             $table->timestamps();
 
         });

@@ -39,6 +39,18 @@ class PostController extends Controller
         $request->file('image')->storeAs('public', $fileName);
         $post['image'] = $fileName;
 
+        if(!empty(request('popularNew'))){
+            $post['popular_new'] = $request->popularNew;
+        }
+
+        if(!empty(request('trendNew'))){
+            $post['trend_new'] = $request->trendNew;
+        }
+
+        if(!empty(request('titleNew'))){
+            $post['title_new'] = $request->titleNew;
+        }
+
         Post::create($post);
         return redirect()->route('new#postList');
 
@@ -80,19 +92,22 @@ class PostController extends Controller
 
         }
 
+        if(!empty(request('popularNew'))){
+            $post['popular_new'] = $request->popularNew;
+        }
+
+        if(!empty(request('trendNew'))){
+            $post['trend_new'] = $request->trendNew;
+        }
+
+        if(!empty(request('titleNew'))){
+            $post['title_new'] = $request->titleNew;
+        }
+
+        
         Post::where('id',$id)->update($post);
         return redirect()->route('new#postList')->with(['updateSuccess' => 'Update Post Successfully']);
     }
-
-
-
-
-
-
-
-
-
-
 
 
 
