@@ -85,22 +85,20 @@
                                     <div class="d-flex gap-3">
                                         <div class="d-flex align-items-center gap-2
                                         ">
-                                            <input type="checkbox" id="popularNew" name="popularNew" value="true">
+                                            <input type="radio" id="popularNew" name="newType" value="Popular New">
                                             <label class="text-muted mt-2
                                             " for="popular">Popular New</label>
                                         </div>
                                         <div class="d-flex align-items-center gap-2">
-                                            <input type="checkbox" id="trendNew" name="trendNew" value="true">
+                                            <input type="radio" id="trendNew" name="newType" value="Trend New">
                                             <label class="text-muted mt-2
                                             " for="trendNew">Trend New</label>
                                         </div>
                                         <div class="d-flex align-items-center gap-2">
-                                            <input type="checkbox" id="titleNew" name="titleNew" value=""Boat"">
+                                            <input type="radio" id="titleNew" name="newType" value="Title New">
                                             <label class="text-muted mt-2
                                             " for="titleNew">Title New</label>
                                         </div>
-                                       
-                                        
                                     </div>
                                 </div>
 

@@ -17,8 +17,6 @@ class Post extends Model
         'reaction_count',
         'comment_count',
         'view_count',
-        'popular_new',
-        'trend_new',
-        'title_new'
+        'new_type',
     ];
 }

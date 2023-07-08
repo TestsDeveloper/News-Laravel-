@@ -5,7 +5,7 @@
     <div class="col-5 offset-7 mt-3">
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
             <strong>
-                 <i class="fa-solid fa-check"></i> {{session('deleteSuccess')}} 
+                 <i class="fa-solid fa-check"></i> {{session('deleteSuccess')}}
             </strong>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
           </div>
@@ -24,10 +24,10 @@
     @endif
 
     <div class="container-fluid">
-    
+
       <div class="row mt-3">
         <div class="col-12">
-        
+
           <div class="card">
             <div class="card-header">
               <h3 class="card-title d-flex align-items-center">
@@ -51,7 +51,7 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body table-responsive p-0">
-                
+
               @if (count($posts) == 0)
               <h2 class="text-center text-danger mt-5">
                 There is no news yet!
@@ -63,6 +63,7 @@
                     <th>ID</th>
                     <th>Title</th>
                     <th>Category</th>
+                    <th>Image</th>
                     <th>Image</th>
                     <th>Viewer</th>
                     <th>React</th>
@@ -78,6 +79,9 @@
                     <td>{{ $post->category_name }}</td>
                     <td>
                       <img src="{{ asset('storage/'.$post->image) }}" class="img-thumbnail" width="100px">
+                    </td>
+                    <td>
+                        {{ $post->new_type }}
                     </td>
                     <td>{{ $post->view_count }}</td>
                     <td>{{ $post->reaction_count }}</td>

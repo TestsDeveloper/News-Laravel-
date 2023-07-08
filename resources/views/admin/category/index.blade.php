@@ -55,7 +55,7 @@
                 <tbody>
                   @foreach ( $categories as $item )
                     <tr>
-                        <td>4</td>
+                        <td>{{ $tiem->id }}</td>
                         <td>{{ $item->category_name }}</td>
                         <td>{{ $item->created_at->diffForHumans() }}</td>
                         <td>
