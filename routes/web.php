@@ -6,10 +6,16 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostController;
 
+
+Route::middleware('admin_auth')->group(function(){
+    Route::redirect('/','home');
+
+});
+
+
 Route::middleware('auth')->group(function () {
      //admin check and user
      Route::get('/condition',[AuthController::class,'authCondition']);
-    Route::redirect('/','login');
 
 
 
@@ -67,7 +73,7 @@ Route::prefix('news')->group(function(){
 
 
 // home page
-Route::middleware('user_auth')->group(function(){
+Route::middleware(['user_auth'])->group(function(){
     Route::get('/home', [UserController::class, 'homePage'])->name("home#page");
 });
 

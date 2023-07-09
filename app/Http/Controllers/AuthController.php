@@ -9,9 +9,9 @@ class AuthController extends Controller
 {
     public function authCondition(){
         if(Auth::user()->role == 'admin'){
-            return redirect()->route('admin#profile');
+            return redirect()->route('admin#profile')->with('adminLogin','Welcome back my admin!');
         }else{
-            return view('user.dashboard');
+            return redirect()->route('home#page')->with('userLogin','Welcome back my user!');
         }
     }
 }

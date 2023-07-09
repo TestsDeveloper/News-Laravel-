@@ -11,8 +11,23 @@
             </ul>
 
             <div class="m-3">
-                <button class="btn btn-outline-danger me-3 px-4 shadow-sm" data-bs-toggle="modal" data-bs-target="#modalLogin">Sign In</button>
-                <button class="btn btn-outline-danger me-3 px-4 shadow-sm" data-bs-toggle="modal" data-bs-target="#modalLRegister">Sign Up</button>
+               @if(!auth()->user())
+               <button class="btn btn-outline-danger me-3 px-4 shadow-sm" data-bs-toggle="modal" data-bs-target="#modalLogin">Sign In</button>
+               <button class="btn btn-outline-danger me-3 px-4 shadow-sm" data-bs-toggle="modal" data-bs-target="#modalLRegister">Sign Up</button>
+
+               @else
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    @if(auth()->user())
+                     <div class="btn position-relative">
+                        {{Auth::user()->name}} <span class="position-absolute top-0 start-100 translate-middle badge border border-light rounded-circle p-2 me-5 mt-2" style="background-color: rgb(62, 251, 48)"><span class="visually-hidden">unread messages</span></span>
+                    </div>
+
+
+                    @endif
+                    <button class="btn btn-outline-danger ms-4 me-3 px-4 shadow-sm" >Logout</button>
+                </form>
+               @endif
 
             </div>
         </div>
