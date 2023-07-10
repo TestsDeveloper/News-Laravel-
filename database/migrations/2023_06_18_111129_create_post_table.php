@@ -22,6 +22,7 @@ return new class extends Migration
             $table->integer('reaction_count')->default(0);
             $table->integer('comment_count')->default(0);
             $table->integer('view_count')->default(0);
+            $table->string('new_type')->default('none');
             $table->timestamps();
 
         });

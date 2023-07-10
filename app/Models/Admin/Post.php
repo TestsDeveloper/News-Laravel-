@@ -16,6 +16,7 @@ class Post extends Model
         'category_id',
         'reaction_count',
         'comment_count',
-        'view_count'
+        'view_count',
+        'new_type',
     ];
 }

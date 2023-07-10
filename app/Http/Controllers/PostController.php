@@ -39,6 +39,10 @@ class PostController extends Controller
         $request->file('image')->storeAs('public', $fileName);
         $post['image'] = $fileName;
 
+        if(!empty(request('newType'))){
+            $post['new_type'] = $request->newType;
+        }
+
         Post::create($post);
         return redirect()->route('new#postList');
 
@@ -80,19 +84,14 @@ class PostController extends Controller
 
         }
 
+        if(!empty(request('newType'))){
+            $post['new_type'] = $request->newType;
+        }
+
+
         Post::where('id',$id)->update($post);
         return redirect()->route('new#postList')->with(['updateSuccess' => 'Update Post Successfully']);
     }
-
-
-
-
-
-
-
-
-
-
 
 
 
